@@ -38,7 +38,7 @@ jobs:
               with:
                   node-version: 22.x
 
-            - run: apt-get update && apt-get install -y curl
+            - run: apt-get update && apt-get install -y curl build-essential
 
             - name: Setup Rust
               uses: dtolnay/rust-toolchain@stable
