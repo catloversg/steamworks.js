@@ -8,7 +8,7 @@ env:
 
 jobs:
     check:
-        runs-on: ubuntu-24.04
+        runs-on: ubuntu-latest
 
         steps:
             - uses: actions/checkout@v4
@@ -25,7 +25,11 @@ jobs:
               run: cargo clippy
 
     build:
-        runs-on: ubuntu-24.04
+        runs-on: ubuntu-latest
+
+        # Run in ubuntu:20.04 container to avoid the issue with glibc version
+        container:
+          image: ubuntu:20.04
 
         steps:
             - uses: actions/checkout@v4
@@ -34,6 +38,9 @@ jobs:
               uses: actions/setup-node@v4
               with:
                   node-version: 22.x
+
+            # ubuntu:20.04 does not have curl and gcc/g++ installed by default
+            - run: apt-get update && apt-get install -y curl build-essential
 
             - name: Setup Rust
               uses: dtolnay/rust-toolchain@stable
