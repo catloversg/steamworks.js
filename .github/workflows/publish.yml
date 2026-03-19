@@ -29,7 +29,7 @@ jobs:
 
         # Run in ubuntu:20.04 container to avoid the issue with glibc version
         container:
-          image: ubuntu:20.04
+            image: ubuntu:20.04
 
         steps:
             - uses: actions/checkout@v4
